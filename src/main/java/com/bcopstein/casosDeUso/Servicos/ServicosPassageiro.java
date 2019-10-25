@@ -25,7 +25,7 @@ public class ServicosPassageiro {
         // Refatorar o Factory para FactoryMethod
         Veiculo veiculo = VeiculosFactory.getInstance().createInstance("ABC123", "GM", "AZUL", "LUXO");
         Motorista motorista = Motorista.novoMotoristaCartao("23489896545", "Tonhao", veiculo);
-        Bairro bOrig = Bairro.novoBairroQuadrado("Petropolis", new Ponto(10,150), 100, 10);
+        Bairro bOrig = Bairro.novoBairroQuadrado("PetropolisNovo", new Ponto(10,150), 100, 10);
         Bairro bDest = Bairro.novoBairroQuadrado("Auxiliadora", new Ponto(50,260), 110, 10);
         Cidade cidade = Cidade.novaCidade("Porto Alegre");
         cidade.cadastraBairro(bOrig);
