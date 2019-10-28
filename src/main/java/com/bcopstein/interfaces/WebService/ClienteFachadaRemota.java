@@ -36,4 +36,11 @@ public class ClienteFachadaRemota {
         dto.setPlacaVeiculo(viagem.getMotorista().getVeiculo().getPlaca());
         return dto;
     }
+
+    @GetMapping("/pontuamotorista")
+    public Boolean getDadosViagem(@RequestParam String nomeMotorista,
+                                  @RequestParam int avaliacaoMotorista){
+        Boolean resp = servicosPassageiro.pontuarMotorista(nomeMotorista, avaliacaoMotorista);
+        return resp;
+    }
 }

@@ -15,8 +15,8 @@ import com.bcopstein.entidades.geometria.Ponto;
 import org.springframework.stereotype.Service;
 
 // Corresponde a fachada dos casos de uso dos clientes
-
-// Precisa gerar excecoes de negocio. Exemplos: cpf inexi
+// Precisa gerar excecoes de negocio. Exemplos: cpf inexistente
+// Deve receber no construtor as dependencias !!
 @Service
 public class ServicosPassageiro {
     public Viagem criarViagem(String cpf,String bairroOrigem,String bairroDestino,String formaPagamento,String catVeiculo){
@@ -35,10 +35,10 @@ public class ServicosPassageiro {
     }
 
     // Ajusta pontuação do motorista em função de uma avaliação
-    public Motorista pontuarMotorista(String cpfMotorista,int avaliacao){
+    public boolean pontuarMotorista(String cpfMotorista,int avaliacao){
         Veiculo veiculo = VeiculosFactory.getInstance().createInstance("ABC123", "GM", "AZUL", "LUXO");
         Motorista motorista = Motorista.novoMotoristaCartao("23489896545", "Tonhao", veiculo);
         motorista.infoPontuacao(avaliacao);
-        return motorista;
+        return true;
     }
 }
