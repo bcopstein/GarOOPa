@@ -9,8 +9,8 @@ import com.bcopstein.entidades.Cidade;
 
 public class RepositorioCidadesImplMem implements RepositorioCidades {
     private Map<String, Cidade> cidades;
-    
-    public RepositorioCidadesImplMem(RepositorioBairros bairros){
+
+    public RepositorioCidadesImplMem(RepositorioBairros bairros) {
         cidades = new HashMap<>();
         Cidade c = Cidade.novaCidade("POOPolis");
         c.cadastraBairro(bairros.recuperaPorNome("Petropolis"));
@@ -21,14 +21,15 @@ public class RepositorioCidadesImplMem implements RepositorioCidades {
         c.cadastraBairro(bairros.recuperaPorNome("Alegria"));
         c.cadastraBairro(bairros.recuperaPorNome("Boa Vista"));
         c.cadastraBairro(bairros.recuperaPorNome("Gavea"));
-        cidades.put(c.getNome(),c);
+        cidades.put(c.getNome(), c);
     }
+
     @Override
     public Cidade recuperaPorNome(String nomeCidade) {
         Cidade cidade = cidades.get(nomeCidade);
-        if (cidade == null){
-            throw new IllegalArgumentException("Cidade inexistente: "+nomeCidade);
+        if (cidade == null) {
+            throw new IllegalArgumentException("Cidade inexistente: " + nomeCidade);
         }
         return cidade;
-    }    
+    }
 }
