@@ -14,6 +14,7 @@ import com.bcopstein.entidades.VeiculosFactory;
 import com.bcopstein.entidades.Viagem;
 import com.bcopstein.entidades.geometria.Ponto;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 // Corresponde a fachada dos casos de uso dos clientes
@@ -24,6 +25,7 @@ public class ServicosPassageiro {
     private RepositorioCidades cidades;
     private RepositorioBairros bairros;
     
+    @Autowired
     public ServicosPassageiro(RepositorioCidades cidades,RepositorioBairros bairros){
         this.cidades = cidades;
         this.bairros = bairros;

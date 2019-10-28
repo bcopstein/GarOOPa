@@ -1,5 +1,8 @@
 package com.bcopstein.entidades;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class VeiculosFactory {
     private static VeiculosFactory esta = null;
 

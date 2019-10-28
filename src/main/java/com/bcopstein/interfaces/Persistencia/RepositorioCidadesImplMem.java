@@ -7,6 +7,9 @@ import com.bcopstein.casosDeUso.Repositorios.RepositorioBairros;
 import com.bcopstein.casosDeUso.Repositorios.RepositorioCidades;
 import com.bcopstein.entidades.Cidade;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class RepositorioCidadesImplMem implements RepositorioCidades {
     private Map<String, Cidade> cidades;
 

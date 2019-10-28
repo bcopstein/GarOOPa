@@ -8,6 +8,9 @@ import com.bcopstein.casosDeUso.Repositorios.RepositorioVeiculos;
 import com.bcopstein.entidades.Motorista;
 import com.bcopstein.entidades.Veiculo;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class RepositorioMotoristasImplMem implements RepositorioMotoristas {
     private Map<String,Motorista> motoristas;
     

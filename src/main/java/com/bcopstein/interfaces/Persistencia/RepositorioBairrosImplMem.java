@@ -7,6 +7,9 @@ import com.bcopstein.casosDeUso.Repositorios.RepositorioBairros;
 import com.bcopstein.entidades.Bairro;
 import com.bcopstein.entidades.geometria.Ponto;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class RepositorioBairrosImplMem implements RepositorioBairros {
     private Map<String,Bairro> bairros;
 
