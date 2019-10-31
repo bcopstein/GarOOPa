@@ -15,17 +15,16 @@ import org.junit.jupiter.params.provider.CsvSource;
 public class AreaTest{
     private Area area;
 
-    /*
     @BeforeEach
     public void setup() {
-        area = new Area(new Ponto(50,80),new Ponto(140,10));
+        area = new Area(new Ponto(10,30),new Ponto(50,10));
     }
 
     @DisplayName("Classifica pontos")
     @ParameterizedTest
-    @CsvSource({ "90,50,0","90,90,1","90,5,2","160,50,4","30,50,8",
-                 "160,90,5","160,5,6","30,90,9","30,5,10",
-                 "140,40,0","70,10,0","70,80,0","50,50,0" })
+    @CsvSource({"30,40,1","30,20,0","30,0,2",
+                "5,40,9","5,20,8","5,0,10",
+                "55,40,5","55,20,4","55,0,6"})
     public void codPontoTest(int x,int y,byte rEsp) {
         byte observed = area.codificaPonto(new Ponto(x,y));
         assertEquals(rEsp,observed);
@@ -33,18 +32,17 @@ public class AreaTest{
 
     @DisplayName("Classifica retas")
     @ParameterizedTest
-    @CsvSource({"60,15,130,70,TODA_DENTRO",
-                "30,50,90,50,INTERSECTA",
-                "90,50,160,50,INTERSECTA",
-                "90,50,90,5,INTERSECTA",
-                "90,90,90,50,INTERSECTA",
-                "30,50,30,100,TODA_FORA",
-                "200,90,130,500,TODA_FORA"
+    @CsvSource({"15,20,35,20,TODA_DENTRO",
+                "15,50,35,50,TODA_FORA",
+                "15,5,35,5,TODA_FORA",
+                "5,40,5,10,TODA_FORA",
+                "55,40,55,5,TODA_FORA",
+                "30,90,90,20,TODA_FORA",// Erros a partir daqui
+                "-5,15,15,-20,TODA_FORA"
                 })
     public void codRetaTest(int xi,int yi,int xf,int yf,SituacaoReta rEsp) {
         Reta reta = new Reta(new Ponto(xi,yi),new Ponto(xf,yf));
         SituacaoReta observed = area.classifica(reta);
         assertEquals(rEsp,observed);
     }
-    */
 }
