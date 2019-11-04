@@ -12,7 +12,6 @@ import com.bcopstein.entidades.Roteiro;
 import com.bcopstein.entidades.Veiculo;
 import com.bcopstein.entidades.VeiculosFactory;
 import com.bcopstein.entidades.Viagem;
-import com.bcopstein.entidades.geometria.Ponto;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
