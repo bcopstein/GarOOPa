@@ -34,7 +34,7 @@ public class ServicosPassageiro {
     }
 
     public Viagem criarViagem(String cpf,String bairroOrigem,String bairroDestino,String formaPagamento,String catVeiculo){
-        Passageiro passageiro = Passageiro.novoPassageiroCartao(cpf, "Ze"+r.nextInt(10)+1);
+        Passageiro passageiro = Passageiro.novoPassageiroCartao(cpf, "Ze"/*+r.nextInt(10)+1*/);
         // Refatorar o Factory para FactoryMethod
         Veiculo veiculo = VeiculosFactory.getInstance().createInstance("ABC123", "GM", "AZUL", "LUXO");
         Motorista motorista = Motorista.novoMotoristaCartao("23489896545", "Tonhao", veiculo);
@@ -43,7 +43,7 @@ public class ServicosPassageiro {
         Bairro bDest = cidade.getBairroPorNome("Ipiranga");
         Roteiro roteiro = Roteiro.criaRoteiro(cidade, bOrig, bDest);
         double custo = custoViagem.custoViagem(cidade, roteiro, passageiro, veiculo);
-        return Viagem.novaViagem(1, roteiro, motorista, passageiro, 10.0+r.nextInt(100));
+        return Viagem.novaViagem(1, roteiro, motorista, passageiro, 10.0/*+r.nextInt(100)*/);
     }
 
     // Ajusta pontuação do motorista em função de uma avaliação
