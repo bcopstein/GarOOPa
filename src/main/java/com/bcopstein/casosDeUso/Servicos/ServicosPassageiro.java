@@ -2,6 +2,7 @@ package com.bcopstein.casosDeUso.Servicos;
 
 import java.util.Random;
 
+import com.bcopstein.casosDeUso.Politicas.CustoViagem;
 import com.bcopstein.casosDeUso.Repositorios.RepositorioBairros;
 import com.bcopstein.casosDeUso.Repositorios.RepositorioCidades;
 import com.bcopstein.entidades.Bairro;
@@ -23,15 +24,16 @@ import org.springframework.stereotype.Service;
 public class ServicosPassageiro {
     private RepositorioCidades cidades;
     private RepositorioBairros bairros;
+    private CustoViagem custoViagem;
     
     @Autowired
     public ServicosPassageiro(RepositorioCidades cidades,RepositorioBairros bairros){
         this.cidades = cidades;
         this.bairros = bairros;
+        custoViagem = CustoViagem.criaCustoViagem("Basico");
     }
 
     public Viagem criarViagem(String cpf,String bairroOrigem,String bairroDestino,String formaPagamento,String catVeiculo){
-        Random r = new Random();
         Passageiro passageiro = Passageiro.novoPassageiroCartao(cpf, "Ze"+r.nextInt(10)+1);
         // Refatorar o Factory para FactoryMethod
         Veiculo veiculo = VeiculosFactory.getInstance().createInstance("ABC123", "GM", "AZUL", "LUXO");
@@ -40,6 +42,7 @@ public class ServicosPassageiro {
         Bairro bOrig = cidade.getBairroPorNome("Petropolis");
         Bairro bDest = cidade.getBairroPorNome("Ipiranga");
         Roteiro roteiro = Roteiro.criaRoteiro(cidade, bOrig, bDest);
+        double custo = custoViagem.custoViagem(cidade, roteiro, passageiro, veiculo);
         return Viagem.novaViagem(1, roteiro, motorista, passageiro, 10.0+r.nextInt(100));
     }
 

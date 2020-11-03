@@ -1,0 +1,94 @@
+Dicas de implementação:
+
+A fachada deve:
+- receber todas as dependências explicitamente pelo construtor
+- dispor de um método para cada funcionalidade do sistema
+
+Exemplo:
+
+class Fachada{
+    private CustoViagem custoViagem;
+    private SelecaoMotorista selecaoMotorista;
+    private RepositorioCidades cidades;
+    private RepositorioBairros ...
+
+    public Fachada(CustoViagem custoViagem,SelecaoMotorista selecaoMotorista,RepositorioCidades cidades,RepositorioBairros bairros
+                   RepositorioMotoristas motoristas etc etc){
+        ...
+    }
+
+    // Roteiro completo de como criar uma viagem
+    public ViagemDTO solicitaVeiculoParaViagem(String cpf,String cidade,String bairroOrigem,String bairroDestino,String formaPagamento,String catVeiculo)
+        Passageiro passageiro = busca passageiro no repositorio pelo cpf
+        Cidade cidade = busca cidade no repositorio de cidades pelo nome
+        Bairro origem = busca bairro de origem no repositorio de bairros pelo nome/cidade
+        Bairro destino = busca bairro destino no repositorio de bairros pelo nome/cidade
+        Roteiro roteiro = Roteiro.criaRoteiro(cidade, bOrig, bDest);
+        Motorista motorista = selecaoMotorista.selecionaMotoristaParaViagem(roteiro,catVeiculo) 
+        Veiculo veiculo = motorista.getVeiculo();
+        double custo = custoViagem.custoViagem(roteiro, passageiro, veiculo);
+        Viagem viagem =  Viagem.novaViagem(1, roteiro, motorista, passageiro, custo);
+        Persiste viagem no repositorio de viagens
+        return viagem
+    }
+
+    public boolean informaPontuacaoMotorista(...){
+        ...
+    }
+
+    public List<Viagem> recuperaViagensDoMotorista(String cpfMotorista){
+        ...
+    }
+
+    public boolean informaPontuacaoPassageiro(String cpfPassageiro){
+        ...
+    }
+}
+
+A classe roteiro deve ser capaz de retornar a lista de bairros percorridos
+A classe CustoViagem (strategy) usa esta lista para calcular o custo
+
+Exemplo:
+public class Roteiro {
+    private Cidade cidade;
+    private Bairro bairroOrigem;
+    private Bairro bairroDestino;
+
+    public static Roteiro criaRoteiro(Cidade cidade,Bairro origem,Bairro destino){
+        return new Roteiro(cidade,origem,destino);
+    }
+
+    private Roteiro(Cidade cidade, Bairro bairroOrigem, Bairro bairroDestino) {
+        this.cidade = cidade;
+        this.bairroOrigem = bairroOrigem;
+        this.bairroDestino = bairroDestino;
+    }
+    
+    public Cidade getCidade() {
+        return cidade;
+    }
+
+    public Bairro getBairroOrigem() {
+        return bairroOrigem;
+    }
+
+    public Bairro getBairroDestino() {
+        return bairroDestino;
+    }
+
+    //Define a reta que representa o percurso da viagem
+    public Reta getRota(){
+        Ponto pOrig = bairroOrigem.getArea().pontoCentral();
+        Ponto pDest = bairroOrigem.getArea().pontoCentral();
+        return new Reta(pOrig,pDest);
+    }
+
+    // Define a lista de bairros percorridos
+    List<Bairro> bairrosPercorridos(){
+        return cidade
+                .getbairros()
+                .stream()
+                .filter(b->b.getArea().classificaReta(this.getRota())!= RETA.TODAFORA)
+                .collect(Collectors.toList());
+    }
+}
